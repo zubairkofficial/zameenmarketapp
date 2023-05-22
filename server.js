@@ -84,7 +84,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Mount routers
 
 app.get('/', (req, res) => {
-    res.send('Welcome to Zameen Market API')
+    return res.json({
+        message : 'Welcome to Zameen Market API'
+    })
 })
 app.use('/api/v1/users', users);
 app.use('/api/v1/society', society);

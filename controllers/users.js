@@ -9,6 +9,10 @@ exports.createUser = asyncHandler(async(req, res, next) => {
     //     return next(new ErrorResponse(`Please upload a file`, 403));
     // }
 
+    // res.json({
+    //     something: req.files
+    // });
+
     const cnic_front_file = req.files.cnic_front;
     const cnic_back_file = req.files.cnic_back;
 
@@ -37,6 +41,9 @@ exports.createUser = asyncHandler(async(req, res, next) => {
                 cnic_front: cnic_front_file.name,
                 cnic_back: cnic_back_file.name
             }
+            res.json({
+                user: reqObject
+            })
             const user = await User.create(reqObject).catch(err => {
                 if (err.code === 11000) {
                     return next(new ErrorResponse('Email Already Exists', 401));
